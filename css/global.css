@@ -1,0 +1,211 @@
+/*
+ *
+ *
+ *	Global.css
+ *
+ *
+ */
+
+
+/****************************************************
+-----------------------------------------------------
+------------------------GENERAL----------------------
+-----------------------------------------------------
+****************************************************/
+
+ 
+body
+{
+	background: url(../images/bg.png); 
+	color: #444;
+}
+
+
+/****************************************************
+-----------------------------------------------------
+------------------------HEADER-----------------------
+-----------------------------------------------------
+****************************************************/
+
+#header_wrapper header
+{
+	width: 960px;
+	position: relative;
+	height: 50px;
+	background: #fff;
+	line-height: 50px;
+	
+	border-bottom-right-radius: 		4px;
+	border-bottom-left-radius: 			4px;
+	-moz-border-radius-bottomright: 	4px;
+	-moz-border-radius-bottomleft: 		4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 	4px;
+	
+	box-shadow: 		0 0 2px #ccc;
+	-moz-box-shadow: 	0 0 2px #ccc;
+	-webkit-box-shadow: 0 0 2px #ccc;
+}
+
+	#header_wrapper header .logo
+	{
+		font-family: Ballpark;
+		font-size: 40px;
+		display: inline;
+		float: left;
+		position: absolute;
+		left: 10px;
+	}
+	
+		.logo span
+		{
+			color: #4d97f5;
+		}
+	
+	#header_wrapper header nav
+	{
+		margin-right: 10px;
+	}
+	
+		#header_wrapper header nav ul
+		{
+			float: right;
+		}
+		
+			#header_wrapper header nav ul li
+			{
+				float: left;
+				margin: 0 10px;
+			}
+
+/****************************************************
+-----------------------------------------------------
+------------------------TIMER------------------------
+-----------------------------------------------------
+****************************************************/
+
+#timer_wrapper
+{
+	background: #444;
+	background: rgba(0, 0, 0, 0.9);
+	padding: 10px 0;
+	margin: 40px auto;
+	color: #fff;
+	overflow: hidden;
+	
+	border-radius: 			4px;
+	-moz-border-radius: 	4px;
+	-webkit-border-radius: 	4px;
+}
+
+#timer_wrapper section.grid_24
+{
+	text-align: center;
+	padding: 30px 0;
+	font-family: Ballpark;
+	font-size: 50px;
+}
+
+/****************************************************
+-----------------------------------------------------
+-------------------------RANK------------------------
+-----------------------------------------------------
+****************************************************/
+
+#rank_wrapper
+{
+	background: #fff;
+	background: rgba(255, 255, 255, 0.9);
+	padding: 10px 0;
+	margin: 40px auto;
+	color: #444;
+	overflow: hidden;
+	
+	border-radius: 			4px;
+	-moz-border-radius: 	4px;
+	-webkit-border-radius: 	4px;
+}
+
+#rank_wrapper section.grid_24
+{
+	text-align: center;
+	padding: 30px 0;
+	font-family: Ballpark;
+	font-size: 40px;
+}
+
+#rank_wrapper section.grid_8 ul
+{
+	padding: 10px;
+	margin: 0;
+}
+
+#rank_wrapper section.grid_8 b
+{
+	float: left;
+	margin-right: 10px;
+}
+
+#rank_wrapper section.grid_8 i
+{
+	float: right;
+	margin-right: 5px;
+}
+
+#rank_wrapper section.grid_8 li
+{
+	list-style-type: none;
+}
+
+/****************************************************
+-----------------------------------------------------
+------------------------FOOTER-----------------------
+-----------------------------------------------------
+****************************************************/
+
+#footer_wrapper
+{
+	width: 100%;
+}
+
+#footer_wrapper footer
+{
+	width: 960px;
+	position: relative;
+	height: 50px;
+	background: #fff;
+	line-height: 50px;
+	
+	border-top-right-radius: 			4px;
+	border-top-left-radius: 			4px;
+	-moz-border-radius-topright: 		4px;
+	-moz-border-radius-topleft: 		4px;
+	-webkit-border-top-right-radius: 	4px;
+	-webkit-border-top-left-radius: 	4px;
+	
+	box-shadow: 		0 0 2px #ccc;
+	-moz-box-shadow: 	0 0 2px #ccc;
+	-webkit-box-shadow: 0 0 2px #ccc;
+}
+
+	#footer_wrapper footer .logo
+	{
+		font-family: Ballpark;
+		font-size: 40px;
+		display: inline;
+		float: left;
+		position: absolute;
+		left: 10px;
+	}
+
+
+/****************************************************
+-----------------------------------------------------
+------------------------FORMS-----------------------
+-----------------------------------------------------
+****************************************************/
+
+.save-form
+{
+	display: none;
+}
