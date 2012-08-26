@@ -161,6 +161,13 @@ body
 	border-bottom: 1px dashed #e2e2e2;
 }
 
+#rank_wrapper section.grid_8 li:last-child
+{
+	list-style-type: none;
+	padding: 15px 5px;
+	border-bottom: none;
+}
+
 #rank_wrapper section.grid_8 span.number
 {
 	font-family: Ballpark;
@@ -171,6 +178,16 @@ body
 	width: 30px;
 	position: relative;
 	top: 2px;
+}
+
+.display_all_wrapper
+{
+	text-align: right;
+}
+
+.display_all_wrapper a
+{
+	margin-right: 15px;
 }
 
 /****************************************************
@@ -225,3 +242,4 @@ body
 {
 	display: none;
 }
+

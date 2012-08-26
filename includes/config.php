@@ -50,4 +50,6 @@ require_once 'class/main.class.php';
 $main 	= new Main($config);
 $dbh = $main->dbh;
 
+$main->generatePseudo();
+
 ?>
