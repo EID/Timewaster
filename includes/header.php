@@ -26,7 +26,7 @@
 					<ul>
 						<li><a class="timer-save" href="">Sauvegarder</a></li>
 						<li class="save-form">
-							<input type="text" id="pseudo" name="pseudo"/><a href="" class="pseudo-send">Envoyer</a>
+							<input type="text" id="pseudo" name="pseudo" maxlength="20"/><a href="" class="pseudo-send">Envoyer</a>
 						</li>
 					</ul>
 				</nav>

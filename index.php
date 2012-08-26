@@ -31,8 +31,35 @@ $pseudoInput 	= document.querySelector('input#pseudo'),
 $pseudoSend 	= document.querySelector('.pseudo-send'),
 $rank 			= document.querySelector('#rank_wrapper');
 
+var updateRank = function() {
+	Ajax.load({
+		container: $rank,
+		url: 'ajax/rank.php',
+	});
+
+	console.log('Rank updated');
+};
+
+var saveScore = function() {
+	Ajax.post({
+		url: 'ajax/save_score.php',
+		data: {
+			'pseudo': 	encodeURIComponent($pseudoInput.value),
+			'time': 	Timer.totalTime
+		},
+		success: function(xhr) {
+			setTimeout(saveScore, ((Math.random() * (90 - 30)) + 30) * 1000);
+		}
+	});
+};
+
 // Initialize and start the timer
 Timer.init($timer).start();
+
+// First rank update
+updateRank();
+
+setInterval(updateRank, 60000);
 
 // Add event listeners
 $timerSave.addEventListener('click', function(evt) {
@@ -43,19 +70,20 @@ $timerSave.addEventListener('click', function(evt) {
 
 $pseudoSend.addEventListener('click', function(evt) {
 	evt.preventDefault();
-	Ajax.get({
+	Ajax.post({
 		url: 'ajax/save_score.php',
-		data: 'pseudo=' +encodeURIComponent($pseudoInput.value)+ '&time=' +Timer.totalTime,
+		data: {
+			'pseudo': 	encodeURIComponent($pseudoInput.value),
+			'time': 	Timer.totalTime
+		},
 		success: function(xhr) {
+			// Set automatic save
 			console.log(xhr.responseText);
+			setTimeout(saveScore, ((Math.random() * (90 - 30)) + 30) * 1000);
 		}
 	});
 });
 
-Ajax.load({
-	container: $rank,
-	url: 'ajax/rank.php'
-})
 </script>
 
 <?php

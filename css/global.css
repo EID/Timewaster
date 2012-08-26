@@ -120,10 +120,13 @@ body
 	margin: 40px auto;
 	color: #444;
 	overflow: hidden;
+	line-height: 18px;
 	
 	border-radius: 			4px;
 	-moz-border-radius: 	4px;
 	-webkit-border-radius: 	4px;
+
+	box-shadow: 0 0 4px #ccc;
 }
 
 #rank_wrapper section.grid_24
@@ -136,14 +139,13 @@ body
 
 #rank_wrapper section.grid_8 ul
 {
-	padding: 10px;
+	padding: 10px 20px;
 	margin: 0;
 }
 
-#rank_wrapper section.grid_8 b
+#rank_wrapper section.grid_8 span.pseudo
 {
-	float: left;
-	margin-right: 10px;
+	font-weight: bold;
 }
 
 #rank_wrapper section.grid_8 i
@@ -155,6 +157,20 @@ body
 #rank_wrapper section.grid_8 li
 {
 	list-style-type: none;
+	padding: 15px 5px;
+	border-bottom: 1px dashed #e2e2e2;
+}
+
+#rank_wrapper section.grid_8 span.number
+{
+	font-family: Ballpark;
+	color: #6eaaf7;
+	font-size: 18px;
+	display: block;
+	float: left;
+	width: 30px;
+	position: relative;
+	top: 2px;
 }
 
 /****************************************************

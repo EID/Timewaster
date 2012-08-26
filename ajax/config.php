@@ -28,11 +28,11 @@ $config['sql']['db'] 	= 'timewaster';
 // Redirection config
 
 $config['option']['urlrewrite'] = Array(
-	'\/timewaster\/home(.html)?$' 	=> 'index.php',
+	'\/timewaster\/timewaster\/home(.html)?$' 	=> 'index.php',
 );
 
 // Don't worry about that, you don't have to modifiy anything
-include 'rewrite.php';
+include '../includes/rewrite.php';
 
 
 $config['dbh'] = new PDO('mysql:host=' .$config['sql']['host']. ';dbname=' .$config['sql']['db'], 

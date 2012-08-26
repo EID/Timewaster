@@ -1,16 +1,17 @@
 <?php
 	include 'config.php';
 	
-	if( isset($_GET['pseudo']) && isset($_GET['time']) ) {
-		echo $_GET['pseudo'];
-		echo $_GET['time'];
+	if( isset($_POST['pseudo']) && isset($_POST['time']) ) {
 		
-		$pseudo = ( $_GET['pseudo'] != '' 	? trim(htmlspecialchars( $_GET['pseudo'], ENT_QUOTES )) 	: '' );
-		$time 	= ( $_GET['time'] 	!= 0 	? intval( $_GET['time'] ) 									: 0 );
+		$pseudo = ( $_POST['pseudo'] ? trim(htmlspecialchars( $_POST['pseudo'], ENT_QUOTES )) 	: '' );
+		$time 	= ( $_POST['time'] 	? intval( $_POST['time'] ) 									: 0 );
 				
-		print_r($main);
-		if( $pseudo != '' && $time != 0 ) {
-			$main->save($pseudo, $time);
+		if ($pseudo && $time) {
+			if ($main->save($pseudo, $time)) {
+				echo 'Sauvegarde effectuée';
+			}
 		}
-	} else { echo 'Epic fail'; }
+	} else {
+		echo 'Echec de la sauvegarde';
+	}
 ?>

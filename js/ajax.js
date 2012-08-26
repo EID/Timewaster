@@ -35,16 +35,45 @@ var Ajax = (function() {
 				if (_xhr.readyState === 4 && _xhr.status === 200) {
 					options.success(_xhr);
 				} else {
-					options.error ? options.error(xhr) : false;
+					options.error ? options.error(_xhr) : false;
 				}
 			}
 
+			// Check if URL is specified
 			if (options.url) {
 				_xhr.open(method, options.url, async);  
+			} else {
+				if (options.error) {
+					options.error(_xhr);
+				} else {
+					return false;
+				}
 			}
+
+			// Format data
+			if (typeof data === 'object') {
+				var dataStr = '',
+					first	= true;
+
+				for (key in data) {
+					if (!first) {
+						dataStr += '&';
+					} else {
+						first = false;
+					}
+
+					dataStr += encodeURIComponent(key) +'='+ encodeURIComponent(data[key]);
+				}
+
+				data = dataStr;
+			}
+
+			// Send correct headers for post request
 			if (method === 'POST') {
 				_xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			}
+
+			// Perform request
        		_xhr.send(data);  
 		}
 	}, 
@@ -68,6 +97,7 @@ var Ajax = (function() {
 	},
 
 	my.get = function(options) {
+		options.method = 'GET';
 		my.request(options);
 	}
 

@@ -16,22 +16,24 @@ class Main
 			$usrData = $this->get($pseudo);
 			
 			if ($score > $usrData['usr_score']) {
-				$q = $this->dbh->prepare('UPDATE tw_user SET usr_score=:score WHERE usr_pseudo=:pseudo');
+				$q = $this->dbh->prepare('UPDATE tw_users SET usr_score=:score WHERE usr_pseudo=:pseudo');
 			}
 		} else {
-			$q = $this->dbh->prepare("INSERT INTO tw_user VALUES('', :pseudo, :score, 0)");
+			$q = $this->dbh->prepare("INSERT INTO tw_users VALUES('', :pseudo, :score, 0)");
 		}
 		
 		if (isset($q)) {
-			$q->execute(array(
+			return $q->execute(array(
 				pseudo 	=> $pseudo,
 				score 	=> $score,
 			));
+		} else {
+			return false;
 		}
 	}
 	
 	public function usrExists($pseudo) {
-		$query = $this->dbh->prepare('SELECT COUNT(id) as nb FROM tw_user WHERE usr_pseudo=:pseudo');
+		$query = $this->dbh->prepare('SELECT COUNT(id) as nb FROM tw_users WHERE usr_pseudo=:pseudo');
 		$query->execute(array(
 			pseudo => $pseudo,
 		));
@@ -42,7 +44,7 @@ class Main
 	}
 	
 	public function get($pseudo) {
-		$query = $this->dbh->prepare('SELECT * FROM tw_user WHERE usr_pseudo=:pseudo');
+		$query = $this->dbh->prepare('SELECT * FROM tw_users WHERE usr_pseudo=:pseudo');
 		$query->execute(array(
 			pseudo => $pseudo,
 		));
