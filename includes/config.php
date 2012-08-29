@@ -1,6 +1,7 @@
 <?php
-
-session_start();
+if (!isset($_SESSION)) {
+	session_start();
+}
 
 // App config
 
@@ -28,7 +29,7 @@ $config['sql']['db'] 	= 'timewaster';
 // Redirection config
 
 $config['option']['urlrewrite'] = Array(
-	'\/timewaster\/home(.html)?$' 	=> 'index.php',
+	'\/eyo\/timewaster\/Timewaster\/home(.html)?$' 	=> 'index.php',
 );
 
 // Don't worry about that, you don't have to modifiy anything

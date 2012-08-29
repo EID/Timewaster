@@ -21,7 +21,9 @@
 	<body>
 		<section id="header_wrapper">
 			<header class="container_24">
-				<div class="logo">Time<span>waster</span></div>
+				<a href="home">
+					<div class="logo">Time<span>waster</span></div>
+				</a>
 				<nav>
 					<ul>
 						<li class="autosave">Sauvegarde automatique : <span class="autosave-pseudo"><?php echo $_SESSION['pseudo']; ?></span></li>

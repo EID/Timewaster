@@ -10,6 +10,7 @@ if( isset($_SESSION['redirect']) && $_SESSION['redirect'] ) {
 			$url 	= preg_replace('#'.$key.'#', $value, $_SERVER['REQUEST_URI']);
 			$page 	= preg_replace('#.+/(.+)\?.+#', '${1}', $url);
 			preg_match('#.+/.+\?(.+)=(.+)#',$url,$matches);
+			$i = 0;
 			while(++$i <= count($matches)) {
 				$_GET[$matches[$i]] = $matches[++$i];
 			}
@@ -19,11 +20,10 @@ if( isset($_SESSION['redirect']) && $_SESSION['redirect'] ) {
 
 	// Redirection
 
+	$_SESSION['redirect'] = false;
 	if(!$url) {
-		header('Location: 404.php');
+		require '404.php';
 	} else {
-		$_SESSION['redirect'] = false;
-		echo $page;
 		include $page;
 	}
 }
