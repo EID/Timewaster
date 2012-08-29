@@ -170,6 +170,11 @@ body
 	border-bottom: none;
 }
 
+#rank_wrapper section.grid_8 li.me
+{
+	color: #4d97f5;
+}
+
 #rank_wrapper section.grid_8 span.number
 {
 	font-family: Ballpark;

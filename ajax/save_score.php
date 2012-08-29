@@ -17,7 +17,11 @@
 	} else {
 		if (isset($_POST['pseudo'])) {
 			$pseudo = $main->sanitize($_POST['pseudo'], 'urldecode', 'nohtml');
-			$save 	= $main->save($pseudo);	
+			if ($pseudo == '') {
+				$save = false;
+			} else {
+				$save 	= $main->save($pseudo);	
+			}
 		} else {
 			$save = $main->save();
 		}

@@ -24,7 +24,7 @@
 			if ($minutes < 10) $minutes = '0'. $minutes;
 			if ($seconds < 10) $seconds = '0'. $seconds;
 	?>
-		<li>
+		<li  <?php echo ($rankData[$j]['pseudo'] == $_SESSION['pseudo']) ? 'class="me"' : ''; ?>>
 			<span class="number"><? echo $i?>. </span>
 			<span class="pseudo"><? echo $rankData[$j]['pseudo'] ?></span>
 			<i><? echo $hours . 'h' .$minutes . 'mn' . $seconds . 's'?></i>
@@ -50,7 +50,7 @@
 			if ($minutes < 10) $minutes = '0'. $minutes;
 			if ($seconds < 10) $seconds = '0'. $seconds;
 	?>
-		<li>
+		<li  <?php echo ($rankData[$j]['pseudo'] == $_SESSION['pseudo']) ? 'class="me"' : ''; ?>>
 			<span class="number"><? echo $i?>. </span>
 			<span class="pseudo"><? echo $rankData[$j]['pseudo'] ?></span>
 			<i><? echo $hours . 'h' .$minutes . 'mn' . $seconds . 's'?></i>
@@ -76,7 +76,7 @@
 			if ($minutes < 10) $minutes = '0'. $minutes;
 			if ($seconds < 10) $seconds = '0'. $seconds;
 	?>
-		<li>
+		<li  <?php echo ($rankData[$j]['pseudo'] == $_SESSION['pseudo']) ? 'class="me"' : ''; ?>>
 			<span class="number"><? echo $i?>. </span>
 			<span class="pseudo"><? echo $rankData[$j]['pseudo'] ?></span>
 			<i><? echo $hours . 'h' .$minutes . 'mn' . $seconds . 's'?></i>
