@@ -1,6 +1,6 @@
 <?php
 
-class Main
+class Main extends Tools
 {
 	public $dbh;
 	
@@ -12,14 +12,14 @@ class Main
 		if (!$this->usrExists($_SESSION['pseudo'])) {
 			$q = $this->dbh->prepare("INSERT INTO tw_users VALUES('', :pseudo, :start, 0, 0)");
 			return $q->execute(array(
-				pseudo 	=> $_SESSION['pseudo'],
-				start 	=> time(),
+				'pseudo' 	=> $_SESSION['pseudo'],
+				'start' 	=> time(),
 			));
 		} else {
 			$q = $this->dbh->prepare('UPDATE tw_users SET usr_start=:start WHERE usr_pseudo=:pseudo');
 			return $q->execute(array(
-				pseudo 	=> $_SESSION['pseudo'],
-				start 	=> time(),
+				'pseudo' 	=> $_SESSION['pseudo'],
+				'start' 	=> time(),
 			));
 		}
 	}
@@ -30,13 +30,16 @@ class Main
 			print_r('Pseudo save session : ' .$pseudo);
 		} else {
 			// Update pseudo
+			$pseudo = trim($pseudo);
 			if (!$this->usrExists($pseudo)) {
 				$pseudoUpdateQuery = $this->dbh->prepare('UPDATE tw_users SET usr_pseudo=:new_pseudo WHERE usr_pseudo=:pseudo');
 				$pseudoUpdateQuery->execute(array(
-					pseudo 		=> $_SESSION['pseudo'],
-					new_pseudo 	=> $pseudo,
+					'pseudo' 		=> $_SESSION['pseudo'],
+					'new_pseudo' 	=> $pseudo,
 				));
-				$_SESSION['pseudo'] = $pseudo;
+
+				$_SESSION['pseudo']        = $pseudo;
+				$_SESSION['pseudoChanged'] = true;
 			} else {
 				echo 'User already exists';
 				return false;
@@ -51,8 +54,8 @@ class Main
 			if (time() > $usrData['usr_save']) {
 				$q = $this->dbh->prepare('UPDATE tw_users SET usr_save=:save WHERE usr_pseudo=:pseudo');
 				return $q->execute(array(
-					pseudo 	=> $pseudo,
-					save 	=> time(),
+					'pseudo' 	=> $pseudo,
+					'save' 	=> time(),
 				));
 			}
 		} else {
@@ -63,7 +66,7 @@ class Main
 	public function usrExists($pseudo) {
 		$query = $this->dbh->prepare('SELECT COUNT(id) as nb FROM tw_users WHERE usr_pseudo=:pseudo');
 		$query->execute(array(
-			pseudo => $pseudo,
+			'pseudo' => $pseudo,
 		));
 		
 		$data = $query->fetch(PDO::FETCH_ASSOC);
@@ -74,7 +77,7 @@ class Main
 	public function get($pseudo) {
 		$query = $this->dbh->prepare('SELECT * FROM tw_users WHERE usr_pseudo=:pseudo');
 		$query->execute(array(
-			pseudo => $pseudo,
+			'pseudo' => $pseudo,
 		));
 		
 		$data = $query->fetch(PDO::FETCH_ASSOC);
@@ -87,7 +90,11 @@ class Main
 			return false;
 		}
 
-		$pseudo = 'Player' .$this->zeroFill( mt_rand(0,10000) );
+		if (!isset($_SESSION['pseudoChanged'])) {
+			$_SESSION['pseudoChanged'] = false;
+		}
+
+		$pseudo = 'Player' .$this->zeroFill( mt_rand(0,100000000), 8);
 
 		if ($this->usrExists($pseudo)) {
 			$this->generatePseudo();
@@ -138,9 +145,14 @@ class Main
 
 	public function nbOtherUsers() {
 		$countQuery = $this->dbh->prepare("SELECT COUNT(id) as nb FROM tw_users");
-		$count 		= $countQuery->fetchAll(PDO::FETCH_ASSOC);
+		$countQuery->execute();
+		$count 		= $countQuery->fetch(PDO::FETCH_ASSOC);
 
 		return $count['nb'];
+	}
+
+	public function pluriel($nb) {
+		return intval($nb) === 1 ? '' : 's';
 	}
 }
 

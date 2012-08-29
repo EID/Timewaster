@@ -1,6 +1,8 @@
 var Ajax = (function() {
 	var my = {},
-		_xhr;
+		_xhr,
+		_requestTimeout,
+		_requestTimeoutReached;
 
 	_init = function() {
 		if(window.XMLHttpRequest) _xhr = new XMLHttpRequest();  
@@ -21,60 +23,84 @@ var Ajax = (function() {
         }
 	},
 
+	_stringify = function(dataObject) {
+		if (typeof dataObject === 'object') {
+			var dataStr = '',
+				first	= true;
+
+			for (key in dataObject) {
+				if (!first) {
+					dataStr += '&';
+				} else {
+					first = false;
+				}
+
+				dataStr += encodeURIComponent(key) +'='+ encodeURIComponent(dataObject[key]);
+			}
+
+			return dataStr;
+		} else {
+			return dataObject;
+		}
+	},
+
 	my.request = function(options) {
+		console.log('request !', options.url);
 		// Init parameters
-		method = options.method || 'GET';
-		async = options.async != null ? !!options.async : true;
-		data = options.data || '';
+		options.method  = (typeof options.method 	== 'undefined') 	? 'GET'             : options.method;
+		options.async   = (typeof options.async 	== 'undefined') 	? true 	            : !!options.async;
+		options.data    = (typeof options.data 		== 'undefined') 	? '' 	            : _stringify(options.data);
+		options.timeout = (typeof options.timeout 	== 'undefined') 	? 5000 	            : options.timeout;
+		options.success = (typeof options.success 	== 'function') 		? options.success 	: (function() {});
+		options.error 	= (typeof options.error 	== 'function') 		? options.error 	: (function() {});
+
+		_requestTimeoutReached = false;
 
 		if (!_xhr) {
 			_init();
 		}
 		if (_xhr) {
 			_xhr.onreadystatechange = function() {
-				if (_xhr.readyState === 4 && _xhr.status === 200) {
-					options.success(_xhr);
-				} else {
-					options.error ? options.error(_xhr) : false;
+				if (_xhr.readyState === 4) {
+					/*console.log(_requestTimeout);
+					clearTimeout(_requestTimeout);
+					clearTimeout(options.reqto);
+					setTimeout(function() { console.log(_requestTimeout); }, 500);*/
+					if (_xhr.status === 200 || _xhr.status === 304) {
+						options.success(_xhr);				
+					} else if (_requestTimeoutReached) {
+						_xhr.abort();
+						console.log('aborted');
+						options.error(_xhr);
+					} else {
+						options.error(_xhr);
+					}
 				}
-			}
+			};
+
+			/*_xhr.onerror = _xhr.onabort = function() {
+				options.error ? options.error(_xhr) : false;
+				console.log('Lol xhr error');
+			}*/
 
 			// Check if URL is specified
 			if (options.url) {
-				_xhr.open(method, options.url, async);  
-			} else {
-				if (options.error) {
-					options.error(_xhr);
-				} else {
-					return false;
-				}
-			}
+				_xhr.open(options.method, options.url, options.async);
 
-			// Format data
-			if (typeof data === 'object') {
-				var dataStr = '',
-					first	= true;
-
-				for (key in data) {
-					if (!first) {
-						dataStr += '&';
-					} else {
-						first = false;
-					}
-
-					dataStr += encodeURIComponent(key) +'='+ encodeURIComponent(data[key]);
-				}
-
-				data = dataStr;
+				/*options.reqto = _requestTimeout = setTimeout(function() {
+					console.log('Timeout : ', _xhr, options);
+					_xhr.abort();
+					_requestTimeoutReached = true;
+				}, timeout);*/
 			}
 
 			// Send correct headers for post request
-			if (method === 'POST') {
+			if (options.method === 'POST') {
 				_xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			}
 
 			// Perform request
-       		_xhr.send(data);  
+       		_xhr.send(options.data);  
 		}
 	}, 
 

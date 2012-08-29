@@ -1,7 +1,8 @@
 <?php
 
+session_start();
 header('HTTP/1.1 200 OK');
-$redirect = true;
+$_SESSION['redirect'] = true;
 include 'includes/config.php';
 
 ?>

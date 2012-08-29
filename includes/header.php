@@ -25,7 +25,9 @@
 				<nav>
 					<ul>
 						<li class="autosave">Sauvegarde automatique : <span class="autosave-pseudo"><?php echo $_SESSION['pseudo']; ?></span></li>
-						<li><a class="timer-save" href="">Changer</a></li>
+						<?php if (isset($_SESSION['pseudoChanged']) && !$_SESSION['pseudoChanged']) { ?>
+							<li><a class="timer-save" href="">Changer</a></li>
+						<?php } ?>
 						<li class="save-form">
 							<input type="text" id="pseudo" name="pseudo" maxlength="20"/><a href="" class="pseudo-send">Envoyer</a>
 						</li>

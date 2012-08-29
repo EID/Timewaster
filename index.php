@@ -23,6 +23,7 @@
 
 <script type="text/javascript" src="js/timer.js"></script>
 <script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/assert.js"></script>
 <script type="text/javascript">
 
 $timer 			= document.querySelector('.timer'),
@@ -46,6 +47,7 @@ var saveScore = function() {
 		url: 'ajax/save_score.php',
 		success: function(xhr) {
 			console.log('Saved : ', xhr.responseText);
+			Assert.success(xhr.responseText);
 		}
 	});
 	setTimeout(saveScore, 5000/*((Math.random() * (90 - 30)) + 30) * 1000*/);
@@ -58,10 +60,12 @@ var startScore = function() {
 		data: {'start': true},
 		success: function(xhr) {
 			console.log('Start Saved : ', xhr.responseText);
+			Assert.success(xhr.responseText);
 			setTimeout(saveScore, 5000/*((Math.random() * (90 - 30)) + 30) * 1000*/);
 		},
 		error: function(xhr) {
 			console.log('Start save error : ', xhr);
+			Assert.error(xhr.responseText);
 		}
 	});
 };
@@ -88,7 +92,7 @@ $pseudoSend.addEventListener('click', function(evt) {
 	Ajax.post({
 		url: 'ajax/save_score.php',
 		data: {
-			'pseudo': 	encodeURIComponent($pseudoInput.value),
+			'pseudo': encodeURIComponent(($pseudoInput.value).trim()),
 		},
 		success: function(xhr) {
 			// Set automatic save
@@ -96,6 +100,12 @@ $pseudoSend.addEventListener('click', function(evt) {
 
 			$saveForm.style.display 	= 'none';
 			$autosavePseudo.innerHTML 	= $pseudoInput.value;
+			$autosave.style.display	 	= 'block';
+		},
+		error: function (xhr) {
+			Assert.error(xhr.responseText);
+			$timerSave.style.display 	= 'block';
+			$saveForm.style.display 	= 'none';
 			$autosave.style.display	 	= 'block';
 		}
 	});

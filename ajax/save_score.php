@@ -11,19 +11,22 @@
 		if ($main->saveStart()) {
 			echo 'Save start success';
 		} else {
+			header('500 Internal Server Error', true, 500);
 			echo 'Save start fail';
 		}
 	} else {
 		if (isset($_POST['pseudo'])) {
-			$pseudo = trim(htmlspecialchars( $_POST['pseudo'], ENT_QUOTES ));
+			$pseudo = $main->sanitize($_POST['pseudo'], 'urldecode', 'nohtml');
 			$save 	= $main->save($pseudo);	
 		} else {
 			$save = $main->save();
 		}
 				
 		if ($save) {
-			echo 'Sauvegarde effectuée';
+			echo 'Sauvegarde effectuée : '. $_SESSION['pseudo'];
 		} else {
+			// Throw HTTP 500 for ajax
+			header('500 Internal Server Error', true, 500);
 			echo 'Erreur lors de la sauvegarde';
 			return false;
 		}

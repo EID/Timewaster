@@ -2,6 +2,7 @@
 	$title = 'Session clear';
 	include 'includes/config.php';
 	unset($_SESSION['pseudo']);
+	unset($_SESSION['pseudoChanged']);
 	include 'includes/header.php';
 ?>
 

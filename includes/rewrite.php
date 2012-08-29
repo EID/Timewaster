@@ -1,6 +1,6 @@
 <?php
 
-if( $redirect ) {
+if( isset($_SESSION['redirect']) && $_SESSION['redirect'] ) {
 	$url = false;
 	
 	// Tester chaque regex
@@ -22,7 +22,7 @@ if( $redirect ) {
 	if(!$url) {
 		header('Location: 404.php');
 	} else {
-		$redirect = false;
+		$_SESSION['redirect'] = false;
 		echo $page;
 		include $page;
 	}

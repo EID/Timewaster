@@ -3,7 +3,10 @@
 ?>
 
 <section class="grid_24">
-	<?php $main->nbOtherUsers(); ?> autres personnes n'ont pas de vie
+	<?php 
+		$nb = $main->nbOtherUsers() - 1;
+		echo $nb .' autre' .$main->pluriel($nb). ' personne' .$main->pluriel($nb). ' n\'' .($main->pluriel($nb) ? 'ont' : 'a') .' pas de vie' ;
+	?>
 </section>
 <section class="grid_8">
 	<ul>

@@ -42,9 +42,9 @@ body
 	-webkit-border-bottom-right-radius: 4px;
 	-webkit-border-bottom-left-radius: 	4px;
 	
-	box-shadow: 		0 0 2px #ccc;
-	-moz-box-shadow: 	0 0 2px #ccc;
-	-webkit-box-shadow: 0 0 2px #ccc;
+	box-shadow: 		0 0 4px #ccc;
+	-moz-box-shadow: 	0 0 4px #ccc;
+	-webkit-box-shadow: 0 0 4px #ccc;
 }
 
 	#header_wrapper header .logo
@@ -126,7 +126,9 @@ body
 	-moz-border-radius: 	4px;
 	-webkit-border-radius: 	4px;
 
-	box-shadow: 0 0 4px #ccc;
+	box-shadow: 		0 0 4px #ccc;
+	-moz-box-shadow: 	0 0 4px #ccc;
+	-webkit-box-shadow: 0 0 4px #ccc;
 }
 
 #rank_wrapper section.grid_24
@@ -216,9 +218,9 @@ body
 	-webkit-border-top-right-radius: 	4px;
 	-webkit-border-top-left-radius: 	4px;
 	
-	box-shadow: 		0 0 2px #ccc;
-	-moz-box-shadow: 	0 0 2px #ccc;
-	-webkit-box-shadow: 0 0 2px #ccc;
+	box-shadow: 		0 0 4px #ccc;
+	-moz-box-shadow: 	0 0 4px #ccc;
+	-webkit-box-shadow: 0 0 4px #ccc;
 }
 
 	#footer_wrapper footer .logo

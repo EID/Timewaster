@@ -44,11 +44,12 @@ $config['dbh'] = new PDO('mysql:host=' .$config['sql']['host']. ';dbname=' .$con
 			  
 // Include here user created class
 
-require_once 'class/main.class.php';
+include_once 'class/tools.class.php';
+include_once 'class/main.class.php';
 
 // Instance precedently loaded classes
-$main 	= new Main($config);
-$dbh = $main->dbh;
+$main = new Main($config);
+$dbh  = $main->dbh;
 
 $main->generatePseudo();
 
