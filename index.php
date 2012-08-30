@@ -48,6 +48,9 @@ var saveScore = function() {
 		success: function(xhr) {
 			console.log('Saved : ', xhr.responseText);
 			Assert.success(xhr.responseText);
+		},
+		error: function(xhr) {
+			Assert.error(xhr.responseText);
 		}
 	});
 	setTimeout(saveScore, 5000/*((Math.random() * (90 - 30)) + 30) * 1000*/);
